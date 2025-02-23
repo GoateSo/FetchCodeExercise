@@ -62,7 +62,10 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                 // use the parsed and sorted items as the new state
                 _uiState.update { it.copy(jsonData = itemGroups, status = RequestStatus.SUCCESS) }
             },
-            { _ -> _uiState.update { it.copy(status = RequestStatus.FAILURE) } }
+            { _ ->
+                // update with failure status
+                _uiState.update { it.copy(status = RequestStatus.FAILURE) }
+            }
         )
         reqQueue.add(jsonQuery)
     }

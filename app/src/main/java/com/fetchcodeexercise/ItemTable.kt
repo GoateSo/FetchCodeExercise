@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,11 +43,12 @@ private fun RowScope.Cell(
 /**
  * displays the three column table that contains all the item entries
  * @param listItems items to display
+ * @param scrollState state for the column scrolling, used to reset when the ListID is changed
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ItemTable(listItems: List<ItemObject>) {
-    LazyColumn(horizontalAlignment = Alignment.CenterHorizontally) {
+fun ItemTable(listItems: List<ItemObject>, scrollState: LazyListState) {
+    LazyColumn(horizontalAlignment = Alignment.CenterHorizontally, state = scrollState) {
         stickyHeader {
             Row(Modifier.background(MaterialTheme.colorScheme.secondaryContainer)) {
                 Cell("Item ID", .25f, MaterialTheme.colorScheme.secondary)
