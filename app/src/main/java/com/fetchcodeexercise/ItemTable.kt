@@ -3,7 +3,6 @@ package com.fetchcodeexercise
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -58,7 +57,7 @@ fun ItemTable(listItems: List<ItemObject>) {
         items(listItems.size) { i ->
             Row(Modifier.fillMaxWidth()) {
                 Cell("${listItems[i].id}", .25f)
-                Cell("${listItems[i].listid}", .25f)
+                Cell("${listItems[i].listID}", .25f)
                 Cell(listItems[i].name, .5f)
             }
         }

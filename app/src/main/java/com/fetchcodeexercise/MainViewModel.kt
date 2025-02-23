@@ -27,6 +27,12 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         requestData()
     }
 
+    /** allow the user to re-request data */
+    fun reload() {
+        _uiState.update { it.copy(status = RequestStatus.LOADING) }
+        requestData()
+    }
+
     /** update the list ID in focus */
     fun selectId(newId: Int) {
         _uiState.update { it.copy(curListId = newId) }
@@ -50,8 +56,9 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                             item.getString("name")
                         )
                     }
-                // group by listID with sorted set to order by listID, defer sort until display
-                val itemGroups = filteredItems.groupByTo(sortedMapOf()) { it.listid }
+                // group by listID with sorted set to order by listID, sort data by name
+                val itemGroups = filteredItems.groupByTo(sortedMapOf()) { it.listID }
+                    .mapValues { (_, itemList) -> itemList.sortedBy { it.name } }
                 // use the parsed and sorted items as the new state
                 _uiState.update { it.copy(jsonData = itemGroups, status = RequestStatus.SUCCESS) }
             },

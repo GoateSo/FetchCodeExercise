@@ -1,6 +1,5 @@
 package com.fetchcodeexercise.utils
 
-
 /**
  * container for the core application state
  * @property jsonData list of items parsed from the request
@@ -9,6 +8,6 @@ package com.fetchcodeexercise.utils
  */
 data class ApplicationState(
     val jsonData: Map<Int, List<ItemObject>> = mapOf(),
-    val status: RequestStatus = RequestStatus.SUCCESS,
+    val status: RequestStatus = RequestStatus.LOADING,
     val curListId: Int = -1
 )
